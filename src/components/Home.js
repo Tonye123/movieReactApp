@@ -16,6 +16,7 @@ import Grid from './elements/Grid';
 import MovieThumb from './elements/MovieThumb';
 import LoadMoreBtn from './elements/LoadMoreBtn';
 import Spinner from './elements/Spinner';
+import NoImage from './images/no_image.jpg';
 
 //custom hooks
 import { useHomeFetch } from './hooks/useHomeFetch';
@@ -64,7 +65,7 @@ const Home = () =>  {
                 image={ 
                    movie.poster_path
                     ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}`
-                    : 'Noimage'
+                    : NoImage
                 }
                 movieId={movie.id}
                 movieName={movie.original_title}

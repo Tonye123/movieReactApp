@@ -3,7 +3,7 @@ import { API_URL, API_KEY } from '../../config';
 
 export const useHomeFetch = () => {
     const [state, setState] = useState({movies: [] })
-    const [loading,setLoading] = useState(false)
+    const [loading,setLoading] = useState(true)
     const [error, setError] = useState(null)
 
     async function fetchMovies( endpoint) {
