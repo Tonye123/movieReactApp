@@ -24,8 +24,9 @@ import { useHomeFetch } from './hooks/useHomeFetch';
 
 const Home = () =>  {
 
-    const[{ state, loading, error }, fetchMovies] = useHomeFetch();
     const [searchTerm,setSearchTerm] = useState('');
+    const[{ state, loading, error }, fetchMovies] = useHomeFetch(searchTerm);
+   
 
     const searchMovies = search => {
         

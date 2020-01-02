@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { API_URL, API_KEY } from '../../config';
 
-export const useHomeFetch = () => {
+export const useHomeFetch = (searchTerm) => {
     const [state, setState] = useState({movies: [] })
     const [loading,setLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -33,9 +33,25 @@ export const useHomeFetch = () => {
         setLoading(false)
     }
 
+    //fetch popular movies initially on mount
     useEffect(() => {
-        fetchMovies(`${API_URL}movie/popular?api_key=${API_KEY}`)
+        if(sessionStorage.homeState) {
+            setState(JSON.parse(sessionStorage.homeState))
+            setLoading(false)
+
+        }else {
+            fetchMovies(`${API_URL}movie/popular?api_key=${API_KEY}`)
+        }
+        
     },[])
+
+    useEffect(()=> {
+        if(!searchTerm) {
+            console.log("writing to session")
+            sessionStorage.setItem('homeState', JSON.stringify(state))
+        }
+
+    },[searchTerm, state])
 
     return [{state,loading,error}, fetchMovies]
 }
